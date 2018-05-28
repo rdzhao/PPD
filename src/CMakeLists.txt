@@ -3,7 +3,7 @@ CMAKE_MINIMUM_REQUIRED(VERSION 2.8)
 # Create project
 PROJECT ( CavityDetection )
 
-SET ( CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/modules/" )
+SET ( CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/cmake_modules/" )
 SET ( TBB_ROOT_DIR "/usr/lib/x86_64-linux-gnu" )
 
 # Find required libraries
