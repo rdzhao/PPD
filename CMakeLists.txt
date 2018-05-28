@@ -27,6 +27,8 @@ SET ( SRC
   main.cpp
   CavityDetection.h
   CavityDetection.cpp
+  nanoflann.hpp
+  FlannUtils.h
  )
 # Create project 
 ADD_EXECUTABLE ( CavityDetection
