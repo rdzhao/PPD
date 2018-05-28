@@ -19,10 +19,11 @@ Make sure all the following libraries installed in your system.<br />
 3. Command "make"<br />
 
 ## Usage
-./CavityDetection obj_file xyzr_file minimum_depth minimum_area minimum_volume<br />
-./CavityDetection: the executable<br />
-obj_file: molecular surface model obj file.<br />
-xyzr_file: atoms information file, xyz coordinate and radius per line for each atom.<br />
-minimum_depth: minimum required pocket depth<br />
-minimum_area: minimum required pocket cross-section area<br />
-minimum_volume: minimum required pocket volume.<br />
+**./CavityDetection** **obj_file** **xyzr_file** **minimum_depth** **minimum_area** **minimum_volume**<br />
+
+**./CavityDetection**: the executable<br />
+**obj_file**: molecular surface model obj file.<br />
+**xyzr_file**: atoms information file, xyz coordinate and radius per line for each atom.<br />
+**minimum_depth**: minimum required pocket depth<br />
+**minimum_area**: minimum required pocket cross-section area<br />
+**minimum_volume**: minimum required pocket volume.<br />
