@@ -7,11 +7,16 @@ This only supports Linux OS.<br />
 ## Dependencies
 Make sure all the following libraries installed in your system.<br />
 
-[Boost](https://www.boost.org/)<br />
-[OpenEXR](http://www.openexr.com/)<br />
-[TBB](https://www.threadingbuildingblocks.org/)<br />
-[CGAL](https://www.cgal.org/)<br />
-[OpenVDB](http://www.openvdb.org/)<br />
+[Boost](https://www.boost.org/) <br /> 
+Command: sudo apt-get install libboost-all-dev <br /> 
+[OpenEXR](http://www.openexr.com/) <br /> 
+Command: sudo apt-get install libopenexr-dev <br />
+[TBB](https://www.threadingbuildingblocks.org/) <br /> 
+Command: sudo apt-get install libtbb-dev <br />
+[CGAL](https://www.cgal.org/) <br /> 
+Command: sudo apt-get install libcgal-dev libcgal-qt5-dev <br />
+[OpenVDB](http://www.openvdb.org/) <br /> 
+Command: sudo apt-get install libopenvdb-dev <br />
 
 ## Building
 1. Create a new folder under root directory<br />
