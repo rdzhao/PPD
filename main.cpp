@@ -1,5 +1,6 @@
 #include "CavityDetection.h"
 //#include <chrono>
+#include <boost/timer.hpp>
 
 int main(int argc, char* argv[])
 {
@@ -16,7 +17,8 @@ int main(int argc, char* argv[])
 
 
 	//std::chrono::high_resolution_clock::time_point t1 = std::chrono::high_resolution_clock::now();
-	
+	boost::timer t;
+
 	cd.InitVDB(200, 1.0);
 	cd.InitMoleculerSurface(argv[1]);
 	cd.InitMembrane();
@@ -33,10 +35,10 @@ int main(int argc, char* argv[])
 	//std::chrono::duration<double> elapsed = t2 - t1;
 	//std::cout << "Execution Time: " << elapsed.count() << std::endl;
 	//cd.OutputInfo(elapsed.count());
-	cd.OutputInfo(100);
-
 	
-
+	double elapsed_time = t.elapsed();
+	
+	cd.OutputInfo(elapsed_time);
 
 	//cd.View();
 

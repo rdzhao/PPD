@@ -205,7 +205,7 @@ int CavityDetection::PocketAtomMap(std::string xyzrFile)
 
 	for (int i = 0; i < _totalCCNum; ++i) {
 		std::set<size_t> indices;
-		//std::cout << _finalLabelToCC[i].size() << std::endl;
+		std::cout << _finalLabelToCC[i].size() << std::endl;
 		for (int j = 0; j < _finalLabelToCC[i].size(); ++j) {
 			openvdb::Coord coord = _finalLabelToCC[i][j];
 			openvdb::Vec3d wldCoord = _xform->indexToWorld(coord);
