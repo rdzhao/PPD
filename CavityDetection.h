@@ -31,7 +31,7 @@
 #include "nanoflann.hpp"
 #include "FlannUtils.h"
 
-#include "Viewer.h"
+//#include "Viewer.h"
 
 using namespace nanoflann;
 
@@ -72,8 +72,8 @@ public:
 
 	int PocketAtomMap(std::string xyzrFile);
 
-	int View(openvdb_viewer::Viewer& viewer, int counter);
-	int ViewPocket(openvdb_viewer::Viewer& pViewer, openvdb::DoubleGrid::Ptr pocket);
+	//int View(openvdb_viewer::Viewer& viewer, int counter);
+	//int ViewPocket(openvdb_viewer::Viewer& pViewer, openvdb::DoubleGrid::Ptr pocket);
 
 	int GetBoundingBox();
 

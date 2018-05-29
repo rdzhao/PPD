@@ -1,5 +1,5 @@
 #include "CavityDetection.h"
-#include <chrono>
+//#include <chrono>
 
 int main(int argc, char* argv[])
 {
@@ -15,7 +15,7 @@ int main(int argc, char* argv[])
 	ssVolume >> volume;
 
 
-	auto t1 = std::chrono::high_resolution_clock::now();
+	//std::chrono::high_resolution_clock::time_point t1 = std::chrono::high_resolution_clock::now();
 	
 	cd.InitVDB(200, 1.0);
 	cd.InitMoleculerSurface(argv[1]);
@@ -29,10 +29,11 @@ int main(int argc, char* argv[])
 	std::cout << "Start collecting atom info..."<< std::endl;
 	cd.PocketAtomMap(argv[2]);
 
-	auto t2 = std::chrono::high_resolution_clock::now();
-	std::chrono::duration<double> elapsed = t2 - t1;
-	std::cout << "Execution Time: " << elapsed.count() << std::endl;
-	cd.OutputInfo(elapsed.count());
+	//std::chrono::high_resolution_clock::time_point t2 = std::chrono::high_resolution_clock::now();
+	//std::chrono::duration<double> elapsed = t2 - t1;
+	//std::cout << "Execution Time: " << elapsed.count() << std::endl;
+	//cd.OutputInfo(elapsed.count());
+	cd.OutputInfo(100);
 
 	
 

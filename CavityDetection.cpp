@@ -660,60 +660,60 @@ int CavityDetection::OutPutTriangleMesh(openvdb::DoubleGrid::Ptr grid)
 	return 1;
 }
 
-int CavityDetection::View(openvdb_viewer::Viewer& viewer, int counter)
-{
-	openvdb::io::File outFile("mygrids.vdb");
+//int CavityDetection::View(openvdb_viewer::Viewer& viewer, int counter)
+//{
+//	openvdb::io::File outFile("mygrids.vdb");
+//
+//	openvdb::GridPtrVec outGrids;
+//	
+//	//outGrids.push_back(_membraneGrid);
+//	outGrids.push_back(_proteinGrid);
+//
+//	outFile.write(outGrids);
+//	outFile.close();
+//
+//	openvdb::GridCPtrVec allGrids;
+//	openvdb::io::File inFile("mygrids.vdb");
+//	inFile.open();
+//	openvdb::GridPtrVecPtr inGrids = inFile.getGrids();
+//	allGrids.insert(allGrids.end(), inGrids->begin(), inGrids->end());
+//
+//	std::cout << "Opening viewer\n";
+//	viewer.open();
+//
+//	std::cout << "View all grids\n";
+//	viewer.view(allGrids, _proteinInterested, _finalCCLabel, _proteinBlocked, colorVector, _xform, counter, center, dist);
+//	//viewer.view(allGrids, _membraneInterested, _ccLabel, _blocked, colorVector, _xform, counter, center, dist);
+//
+//	return 1;
+//}
 
-	openvdb::GridPtrVec outGrids;
-	
-	//outGrids.push_back(_membraneGrid);
-	outGrids.push_back(_proteinGrid);
-
-	outFile.write(outGrids);
-	outFile.close();
-
-	openvdb::GridCPtrVec allGrids;
-	openvdb::io::File inFile("mygrids.vdb");
-	inFile.open();
-	openvdb::GridPtrVecPtr inGrids = inFile.getGrids();
-	allGrids.insert(allGrids.end(), inGrids->begin(), inGrids->end());
-
-	std::cout << "Opening viewer\n";
-	viewer.open();
-
-	std::cout << "View all grids\n";
-	viewer.view(allGrids, _proteinInterested, _finalCCLabel, _proteinBlocked, colorVector, _xform, counter, center, dist);
-	//viewer.view(allGrids, _membraneInterested, _ccLabel, _blocked, colorVector, _xform, counter, center, dist);
-
-	return 1;
-}
-
-int CavityDetection::ViewPocket(openvdb_viewer::Viewer& pViewer, openvdb::DoubleGrid::Ptr pocket)
-{
-	openvdb::io::File outFile("pocketGrid.vdb");
-
-	openvdb::GridPtrVec outGrids;
-	outGrids.push_back(pocket);
-	outGrids.push_back(_membraneGrid);
-
-	outFile.write(outGrids);
-	outFile.close();
-
-	openvdb::GridCPtrVec allGrids;
-
-	openvdb::io::File inFile("pocketGrid.vdb");
-	inFile.open();
-	openvdb::GridPtrVecPtr inGrids = inFile.getGrids();
-	allGrids.insert(allGrids.end(), inGrids->begin(), inGrids->end());
-
-	std::cout << "Opening viewer\n";
-	pViewer.open();
-
-	std::cout << "View all grids\n";
-	pViewer.view(allGrids, _proteinInterested, _finalCCLabel, _proteinBlocked, colorVector, _xform, 0, center, dist);
-
-	return 1;
-}
+//int CavityDetection::ViewPocket(openvdb_viewer::Viewer& pViewer, openvdb::DoubleGrid::Ptr pocket)
+//{
+//	openvdb::io::File outFile("pocketGrid.vdb");
+//
+//	openvdb::GridPtrVec outGrids;
+//	outGrids.push_back(pocket);
+//	outGrids.push_back(_membraneGrid);
+//
+//	outFile.write(outGrids);
+//	outFile.close();
+//
+//	openvdb::GridCPtrVec allGrids;
+//
+//	openvdb::io::File inFile("pocketGrid.vdb");
+//	inFile.open();
+//	openvdb::GridPtrVecPtr inGrids = inFile.getGrids();
+//	allGrids.insert(allGrids.end(), inGrids->begin(), inGrids->end());
+//
+//	std::cout << "Opening viewer\n";
+//	pViewer.open();
+//
+//	std::cout << "View all grids\n";
+//	pViewer.view(allGrids, _proteinInterested, _finalCCLabel, _proteinBlocked, colorVector, _xform, 0, center, dist);
+//
+//	return 1;
+//}
 
 int CavityDetection::GetBoundingBox()
 {
@@ -1240,7 +1240,7 @@ int CavityDetection::ReconstructMajorComponentTree()
 	for (int i = 0; i < _components.size(); ++i){
 		if (i == 0){
 			PNodeIter prePni = repPGraph->nodes.end();
-			for (auto iter = _components[i].path.begin(); iter != _components[i].path.end(); ++iter){
+			for (std::list<PNodeIter>::iterator iter = _components[i].path.begin(); iter != _components[i].path.end(); ++iter){
 				PNodeIter pni = repPGraph->InsertNode(*iter);
 				oldToNewPni[*iter] = pni;
 				newToOldPni[pni] = *iter;
@@ -1251,7 +1251,7 @@ int CavityDetection::ReconstructMajorComponentTree()
 		else{
 			PNodeIter prePni = oldToNewPni[*(_components[i].path.begin())];
 			
-			for (auto iter = ++_components[i].path.begin(); iter != _components[i].path.end(); ++iter){
+			for (std::list<PNodeIter>::iterator iter = ++_components[i].path.begin(); iter != _components[i].path.end(); ++iter){
 				PNodeIter pni = repPGraph->InsertNode(*iter);
 				oldToNewPni[*iter] = pni;
 				newToOldPni[pni] = *iter;
@@ -1262,13 +1262,13 @@ int CavityDetection::ReconstructMajorComponentTree()
 	}
 
 	int kk = 0;
-	for (auto iter = repPGraph->nodes.begin(); iter != repPGraph->nodes.end(); ++iter, ++kk){
+	for (PNodeIter iter = repPGraph->nodes.begin(); iter != repPGraph->nodes.end(); ++iter, ++kk){
 		iter->idx = kk;
 	}
 
 	std::cout << "Construct children..." << std::endl;
 	int initCCNum = 0;
-	for (auto iter = repPGraph->nodes.begin(); iter != repPGraph->nodes.end(); ++iter){
+	for (PNodeIter iter = repPGraph->nodes.begin(); iter != repPGraph->nodes.end(); ++iter){
 		PNodeIter parent = iter->parent;
 
 		if (parent != repPGraph->nodes.end()){
@@ -1583,7 +1583,7 @@ int CavityDetection::OutputInfo(double time)
 			out << "Max Depth: " << _depth[i] << std::endl;
 			out << "Adjacent Atoms: "<< std::endl;
 			int kkk = 0;
-			for (auto iter = _CCLabelToAtoms[i].begin(); iter != _CCLabelToAtoms[i].end(); ++iter){
+			for (std::set<size_t>::iterator iter = _CCLabelToAtoms[i].begin(); iter != _CCLabelToAtoms[i].end(); ++iter){
 				out << *iter << " ";
 				kkk++;
 			}
@@ -1673,7 +1673,7 @@ int CavityDetection::ExtractPocket(std::stack<openvdb::Coord> pocketS)
 
 		visited[coord] = true;
 		if (proteinAcc.getValue(coord) > membraneAcc.getValue(coord)) {
-			pocketAcc.setValue(coord, max(membraneAcc.getValue(coord), -proteinAcc.getValue(coord)));
+			pocketAcc.setValue(coord, std::max(membraneAcc.getValue(coord), -proteinAcc.getValue(coord)));
 		}
 
 		for (int i = 0; i < 27; ++i)
@@ -1745,8 +1745,8 @@ int CavityDetection::ExtractPGraph()
 
 	//output node color
 	for (int i = 0; i < _components.size(); ++i) {
-		for (auto iter = _components[i].path.begin(); iter != --_components[i].path.end(); ++iter) {
-			auto iitt = iter;
+		for (std::list<PNodeIter>::iterator iter = _components[i].path.begin(); iter != --_components[i].path.end(); ++iter) {
+			std::list<PNodeIter>::iterator iitt = iter;
 			++iitt;
 			graph << (*iter)->idx + 1 << " " << (*iitt)->idx + 1 << " " << i + 1 << std::endl;
 		}	
